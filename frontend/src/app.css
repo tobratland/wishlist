@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Christmas custom styles */
+.snowfall {
+  background: url('/images/snowfall.gif') repeat;
+  background-size: cover;
+}
