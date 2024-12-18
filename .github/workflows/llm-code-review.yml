@@ -23,3 +23,10 @@ jobs:
           file_types: '.rs,.md,.toml, .go, .svelte, .ts, .tsx, .js, .jsx, .html, .css, .scss, .json'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Upload prompt logs
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: prompt_logs
+          path: prompt_logs.txt
