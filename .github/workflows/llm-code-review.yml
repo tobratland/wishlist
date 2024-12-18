@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run LLM Code Review
-        uses: tobratland/actions@expand-functionality
+        uses: tobratland/actions@single-prompt
         with:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           file_types: '.rs,.md,.toml, .go, .svelte, .ts, .tsx, .js, .jsx, .html, .css, .scss, .json'
