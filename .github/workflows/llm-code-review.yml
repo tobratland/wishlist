@@ -1,0 +1,32 @@
+name: LLM Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  code_review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Run LLM Code Review
+        uses: tobratland/actions@single-prompt
+        with:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          file_types: '.rs,.md,.toml, .go, .svelte, .ts, .tsx, .js, .jsx, .html, .css, .scss, .json'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload prompt logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prompt_logs
+          path: prompt_logs.txt
